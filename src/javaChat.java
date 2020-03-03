@@ -1,9 +1,11 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 
 public class javaChat extends JFrame {
+    public socketClient socketToSend;
     private JPanel mainPanel;
     private JButton sendButton;
     private JTextField writeText;
@@ -22,8 +24,21 @@ public class javaChat extends JFrame {
         sendButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-
+                String message= writeText.getText();
+                socketToSend.sendMessage(message);
+            }
+        });
+        newMsgButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int ip = (int) Double.parseDouble(ipText.getText());
+                int port = (int) Double.parseDouble((portText.getText()));
+                try {
+                    socketClient socketToSend = new socketClient(ip,port);
+                    socketToSend.inConversation=true;
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
             }
         });
     }

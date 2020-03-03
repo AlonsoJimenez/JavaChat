@@ -1,3 +1,4 @@
+import java.io.DataOutputStream;
 import java.net.Socket;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -8,12 +9,20 @@ public class socketClient {
     public int ip;
     public int port;
     public String ipString;
+    public DataOutputStream messageObject;
 
 
     public socketClient(int ip, int port) throws IOException {
         ipString = Integer.toString(ip);
         Socket theSocketClient = new Socket(ipString, port);
+        messageObject = new DataOutputStream(theSocketClient.getOutputStream());
 
+    }
+    public void sendMessage(String messsage){
+        try{
+        messageObject.writeUTF(messsage);
+
+    }catch(IOException e){};
 
     }
 
