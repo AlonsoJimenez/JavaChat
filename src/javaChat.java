@@ -21,13 +21,17 @@ public class javaChat extends JFrame {
     private int portNumber = socketToReceive.realPort(socketToReceive.port);
     public static JList historyList;
     public static JTextArea showMsg;
-
+    public void setValues(){
+        this.showMsgReal=showMsg;
+        this.historyListReal=historyList;
+    }
 
     public javaChat(String title) {
         super(title);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setContentPane(mainPanel);
         this.pack();
+        this.setValues();
         sendButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -41,15 +45,16 @@ public class javaChat extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String ip=ipText.getText();
                 int port = (int) Double.parseDouble((portText.getText()));
-                if (socketToSend.inConversation){
+                if (false){
                     try {
-                        socketToSend.disconnect();
+                        socketToSend.theSocketClient.close();
                         socketClient socketToSend = new socketClient("127.0.0.1",port);
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }}else{
                         try {
                             socketClient socketToSend = new socketClient("127.0.0.1",port);
+                            socketToSend.inConversation=true;
                         } catch (IOException ex) {
                             ex.printStackTrace();
                         }
@@ -78,17 +83,17 @@ public class javaChat extends JFrame {
                 }
             }
         });
+
     }
 
     public static void main(String[] args){
-        JFrame frame= new javaChat("Chat");
+        JFrame frame= new javaChat("Chat1");
+        JFrame frame2= new javaChat("chat2");
         frame.setVisible(true);
+        frame2.setVisible(true);
     }
 
-    public void setValues(){
-        this.showMsgReal=showMsg;
-        this.historyListReal=historyList;
-    }
+
 
     private void createUIComponents() {
         // TODO: place custom component creation code here

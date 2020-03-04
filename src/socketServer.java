@@ -8,18 +8,18 @@ import java.io.IOException;
 public class socketServer {
     manageHistory history;
     boolean active = true;
-    int port= 2001;
+    int port= 3000;
 
     private boolean available(int port) {
         try (Socket ignored = new Socket("localhost", port)) {
-            return false;
-        } catch (IOException ignored) {
             return true;
+        } catch (IOException ignored) {
+            return false;
         }
     }
     public int realPort (int port) {
         port = this.port;
-        for (int i = port; i <= 2200; i++) {
+        for (int i = port; i <= 3100; i++) {
             if (available(i)) {
                 System.out.println(i);
                 return i;
@@ -29,18 +29,18 @@ public class socketServer {
         return 0;
     }
 
-    public ServerSocket server;{
+    public ServerSocket server(){
         try {
-            server = new ServerSocket(realPort(port));
+            return new ServerSocket(realPort(realPort(port)));
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }return null;
     }
     public void receive(){
         boolean active = true;
         while (active){
             try{
-            Socket receiver = server.accept();
+            Socket receiver = server().accept();
             BufferedReader read = new BufferedReader(new InputStreamReader(receiver.getInputStream()));
             String message= read.readLine();
             String[] separation = message.split("%");

@@ -13,7 +13,7 @@ public class socketClient {
 
 
     public socketClient(String ip, int port) throws IOException {
-        theSocketClient = new Socket(ip, port);
+        theSocketClient = new Socket("127.0.0.1",port);
         messageObject = new DataOutputStream(theSocketClient.getOutputStream());
 
     }
