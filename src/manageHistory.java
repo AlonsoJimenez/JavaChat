@@ -24,6 +24,7 @@ public class manageHistory {
                 return i;
             }
         }
+        return 0;
     }
     public void setText(int port, String message){
         if(checkExistance(port)){

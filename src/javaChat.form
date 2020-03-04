@@ -31,7 +31,9 @@
           </grid>
         </constraints>
         <properties>
-          <text value=""/>
+          <editable value="false"/>
+          <enabled value="false"/>
+          <text value="127.0.0.1"/>
         </properties>
       </component>
       <component id="4f48e" class="javax.swing.JLabel">
@@ -58,15 +60,18 @@
           <text value="New Msg"/>
         </properties>
       </component>
-      <component id="a973f" class="javax.swing.JTextArea" binding="showMsg">
+      <component id="a973f" class="javax.swing.JTextArea" binding="showMsgReal">
         <constraints>
           <grid row="1" column="1" row-span="1" col-span="5" vsize-policy="0" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="200"/>
           </grid>
         </constraints>
         <properties>
+          <dragEnabled value="false"/>
+          <editable value="true"/>
           <enabled value="false"/>
           <text value=""/>
+          <wrapStyleWord value="false"/>
         </properties>
       </component>
       <component id="af99c" class="javax.swing.JTextField" binding="writeText">
@@ -85,7 +90,7 @@
           <text value="Send"/>
         </properties>
       </component>
-      <component id="a7e16" class="javax.swing.JList" binding="historyList">
+      <component id="a7e16" class="javax.swing.JList" binding="historyListReal">
         <constraints>
           <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="50"/>
@@ -93,7 +98,11 @@
         </constraints>
         <properties>
           <model/>
+          <selectionMode value="0"/>
         </properties>
+        <clientProperties>
+          <List.isFileList class="java.lang.Boolean" value="false"/>
+        </clientProperties>
       </component>
       <component id="99c6f" class="javax.swing.JButton" binding="selectButton" default-binding="true">
         <constraints>

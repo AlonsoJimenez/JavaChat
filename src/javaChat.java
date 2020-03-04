@@ -12,13 +12,15 @@ public class javaChat extends JFrame {
     private JPanel mainPanel;
     private JButton sendButton;
     private JTextField writeText;
-    public static JList historyList;
+    public  JList historyListReal;
+    public  JTextArea showMsgReal;
     private JTextField ipText;
     private JTextField portText;
     private JButton newMsgButton;
-    public static JTextArea showMsg;
     private JButton selectButton;
     private int portNumber = socketToReceive.realPort(socketToReceive.port);
+    public static JList historyList;
+    public static JTextArea showMsg;
 
 
     public javaChat(String title) {
@@ -39,18 +41,41 @@ public class javaChat extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String ip=ipText.getText();
                 int port = (int) Double.parseDouble((portText.getText()));
-                try {
-                    socketClient socketToSend = new socketClient(ip,port);
-                    socketToSend.inConversation=true;
-                } catch (IOException ex) {
-                    ex.printStackTrace();
+                if (socketToSend.inConversation){
+                    try {
+                        socketToSend.disconnect();
+                        socketClient socketToSend = new socketClient("127.0.0.1",port);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }}else{
+                        try {
+                            socketClient socketToSend = new socketClient("127.0.0.1",port);
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                        }
+                    }
                 }
-            }
+
         });
         selectButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int numberSelected = (int) historyList.getSelectedValue();
+                history.setText(numberSelected, "");
+                if (socketToSend.inConversation){
+                    try {
+                        socketToSend.disconnect();
+                        socketClient socketToSend = new socketClient("127.0.0.1",numberSelected);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }}
+                    else{
+                        try {
+                            socketClient socketToSend = new socketClient("127.0.0.1",numberSelected);
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                    }
+                }
             }
         });
     }
@@ -58,6 +83,11 @@ public class javaChat extends JFrame {
     public static void main(String[] args){
         JFrame frame= new javaChat("Chat");
         frame.setVisible(true);
+    }
+
+    public void setValues(){
+        this.showMsgReal=showMsg;
+        this.historyListReal=historyList;
     }
 
     private void createUIComponents() {

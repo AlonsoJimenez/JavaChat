@@ -6,13 +6,14 @@ import java.io.IOException;
 
 public class socketClient {
     boolean inConversation = false;
+    Socket theSocketClient;
     public String ip="127.0.0.1";
     public int port;
     public DataOutputStream messageObject;
 
 
     public socketClient(String ip, int port) throws IOException {
-        Socket theSocketClient = new Socket(ip, port);
+        theSocketClient = new Socket(ip, port);
         messageObject = new DataOutputStream(theSocketClient.getOutputStream());
 
     }
@@ -20,8 +21,13 @@ public class socketClient {
         try{
         messageObject.writeUTF(messsage);
 
-    }catch(IOException e){};
+    }catch(IOException e){e.printStackTrace();};
 
     }
+    public void disconnect() throws IOException {
+        theSocketClient.close();
+    }
+
+
 
 }
