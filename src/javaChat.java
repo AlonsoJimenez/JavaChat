@@ -7,15 +7,17 @@ import java.net.ServerSocket;
 
 public class javaChat extends JFrame {
     public socketServer socketToReceive= new socketServer();
+    manageHistory history;
     public socketClient socketToSend;
     private JPanel mainPanel;
     private JButton sendButton;
     private JTextField writeText;
-    private JList historyList;
+    public static JList historyList;
     private JTextField ipText;
     private JTextField portText;
     private JButton newMsgButton;
     public static JTextArea showMsg;
+    private JButton selectButton;
     private int portNumber = socketToReceive.realPort(socketToReceive.port);
 
 
@@ -29,12 +31,13 @@ public class javaChat extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String message= writeText.getText();
                 socketToSend.sendMessage(Integer.toString(portNumber)+"%"+message+"\n");
+                history.setText(portNumber,"ME:\n"+message);
             }
         });
         newMsgButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int ip = (int) Double.parseDouble(ipText.getText());
+                String ip=ipText.getText();
                 int port = (int) Double.parseDouble((portText.getText()));
                 try {
                     socketClient socketToSend = new socketClient(ip,port);
@@ -42,6 +45,12 @@ public class javaChat extends JFrame {
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
+            }
+        });
+        selectButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int numberSelected = (int) historyList.getSelectedValue();
             }
         });
     }

@@ -6,6 +6,7 @@ import java.net.Socket;
 import java.io.IOException;
 
 public class socketServer {
+    manageHistory history;
     boolean active = true;
     int port= 2001;
 
@@ -43,7 +44,8 @@ public class socketServer {
             BufferedReader read = new BufferedReader(new InputStreamReader(receiver.getInputStream()));
             String message= read.readLine();
             String[] separation = message.split("%");
-            javaChat.showMsg.setText(separation[1]);
+            int portNumber=Integer.parseInt(separation[0]);
+            history.setText(portNumber,"HIM:\n"+separation[1]);
             receiver.close();
             }catch (IOException e){e.printStackTrace();}
 

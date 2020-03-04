@@ -6,15 +6,13 @@ import java.io.IOException;
 
 public class socketClient {
     boolean inConversation = false;
-    public int ip;
+    public String ip="127.0.0.1";
     public int port;
-    public String ipString;
     public DataOutputStream messageObject;
 
 
-    public socketClient(int ip, int port) throws IOException {
-        ipString = Integer.toString(ip);
-        Socket theSocketClient = new Socket(ipString, port);
+    public socketClient(String ip, int port) throws IOException {
+        Socket theSocketClient = new Socket(ip, port);
         messageObject = new DataOutputStream(theSocketClient.getOutputStream());
 
     }
