@@ -2,9 +2,11 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.net.ServerSocket;
 
 
 public class javaChat extends JFrame {
+    public socketServer socketToReceive= new socketServer();
     public socketClient socketToSend;
     private JPanel mainPanel;
     private JButton sendButton;
@@ -13,7 +15,8 @@ public class javaChat extends JFrame {
     private JTextField ipText;
     private JTextField portText;
     private JButton newMsgButton;
-    private JTextArea showMsg;
+    public static JTextArea showMsg;
+    private int portNumber = socketToReceive.realPort(socketToReceive.port);
 
 
     public javaChat(String title) {
@@ -25,7 +28,7 @@ public class javaChat extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String message= writeText.getText();
-                socketToSend.sendMessage(message);
+                socketToSend.sendMessage(Integer.toString(portNumber)+"%"+message+"\n");
             }
         });
         newMsgButton.addActionListener(new ActionListener() {
