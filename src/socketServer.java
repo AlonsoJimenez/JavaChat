@@ -8,7 +8,7 @@ import java.io.IOException;
 public class socketServer {
     manageHistory history;
     boolean active = true;
-    int port= 3000;
+    int port= 1;
 
     private boolean available(int port) {
         try (Socket ignored = new Socket("localhost", port)) {
