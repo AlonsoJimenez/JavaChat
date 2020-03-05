@@ -1,8 +1,16 @@
 import java.awt.event.ActionListener;
 import java.util.Vector;
 
+/**
+ * esta clase maneja un historial para poder almacenar los mensajes y no desordenar conversaciones, igualmente verifica si el mensaje recibido pertenece a una conversacion previamente existenete o si es un uevo ususario.
+ */
 public class manageHistory {
     int[] ports;
+
+    /**
+     *
+     * @return convierte la lista de int en una de strings para ser agregados a la Jlist
+     */
     String[] listData(){
         for(int i=0; i<ports.length; i++){
             listData()[i]=Integer.toString(ports[i]);
@@ -10,6 +18,12 @@ public class manageHistory {
         return listData();
     }
     public String[] messages;
+
+    /**
+     *
+     * @param portNumber
+     * @return evaluacion si es un usuario nuevo o no.
+     */
     public boolean checkExistance(int portNumber){
         for(int i=0 ; i<ports.length; i++){
             if(portNumber==ports[i]){

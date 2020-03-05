@@ -10,6 +10,11 @@ public class socketServer {
     boolean active = true;
     int port= 1;
 
+    /**
+     *
+     * @param port
+     * @return Un booleano evaluado en la posibilidad de utilizar dicho puerto.
+     */
     private boolean available(int port) {
         try (Socket ignored = new Socket("localhost", port)) {
             return true;
@@ -17,6 +22,12 @@ public class socketServer {
             return false;
         }
     }
+
+    /**
+     *
+     * @param port
+     * @return numero de puerto en el que se creara el socket server
+     */
     public int realPort (int port) {
         port = this.port;
         for (int i = port; i <= 3100; i++) {
@@ -29,6 +40,7 @@ public class socketServer {
         return 0;
     }
 
+
     public ServerSocket server(){
         try {
             return new ServerSocket(realPort(realPort(port)));
@@ -36,6 +48,10 @@ public class socketServer {
             e.printStackTrace();
         }return null;
     }
+
+    /**
+     * recive mensaje y maneja eel historial y donde corresponde colocarlo.
+     */
     public void receive(){
         boolean active = true;
         while (active){

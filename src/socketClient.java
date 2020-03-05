@@ -13,10 +13,18 @@ public class socketClient {
 
 
     public socketClient(String ip, int port) throws IOException {
+        /**
+         * creacion del socket cliente
+         */
         theSocketClient = new Socket("127.0.0.1",port);
         messageObject = new DataOutputStream(theSocketClient.getOutputStream());
 
     }
+
+    /**
+     * metodo para mandar mensaje por medio del socket
+     * @param messsage
+     */
     public void sendMessage(String messsage){
         try{
         messageObject.writeUTF(messsage);

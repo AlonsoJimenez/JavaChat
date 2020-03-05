@@ -45,7 +45,10 @@ public class javaChat extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String ip=ipText.getText();
                 int port = (int) Double.parseDouble((portText.getText()));
-                if (false){
+                /**
+                 * evalua el if para saber si existe un socket client conectado, de ser asi lo desconecta para crear una nueva conexion.
+                 */
+                if (socketToSend.inConversation){
                     try {
                         socketToSend.theSocketClient.close();
                         socketClient socketToSend = new socketClient("127.0.0.1",port);
@@ -67,6 +70,9 @@ public class javaChat extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 int numberSelected = (int) historyList.getSelectedValue();
                 history.setText(numberSelected, "");
+                /**
+                 * evalua el if para saber si existe un socket client conectado, de ser asi lo desconecta para crear una nueva conexion.
+                 */
                 if (socketToSend.inConversation){
                     try {
                         socketToSend.disconnect();
